@@ -1,18 +1,43 @@
-const totalCartas=10
+const totalCartas=20
 let cards=[]
 let selectCards=[]
 let valueCards=[]
 let Movi=0
 let intentos=0
 let puntos=0
-let tiempo=0
+let temporizador=false
+let timer=60
+let tiempoAcabado=null
+
+
+
 let MostrarAciertos=document.getElementById('puntos')
 let MostrarDesaciertos=document.getElementById('intentos')
+let MostrarTiempo=document.getElementById('tiempo')
 
 let cardsss=' <div class="card"><div class="back"></div><div class="face"></div></div>'
 
 /*funcion del juego*/
+
+function contarTiempo(){
+    tiempoAcabado = setInterval(()=>{
+        timer--;
+        MostrarTiempo.innerHTML = 'Tiempo: ' + timer ;
+        if(timer == 0){
+            clearInterval(tiempoAcabado)
+            cardsBloqueadas();
+        }
+    },1000);
+}
+
+
 function activate(e){
+
+    if(temporizador == false){
+        contarTiempo();
+        temporizador = true;
+    }
+
     if(Movi<2){
         if((!selectCards[0] || selectCards[0] !== e.target) && !e.target.classList.contains('active')){
             e.target.classList.add('active');
