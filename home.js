@@ -6,7 +6,7 @@ let Movi=0
 let intentos=0
 let puntos=0
 let temporizador=false
-let timer=60
+let timer=50
 let tiempoAcabado=null
 
 
@@ -22,10 +22,11 @@ let cardsss=' <div class="card"><div class="back"></div><div class="face"></div>
 function contarTiempo(){
     tiempoAcabado = setInterval(()=>{
         timer--;
-        MostrarTiempo.innerHTML = 'Tiempo: ' + timer ;
+        MostrarTiempo.innerHTML = 'Tiempo: ' + timer + " segundos";
         if(timer == 0){
             clearInterval(tiempoAcabado)
-            cardsBloqueadas();
+            setInterval(location.reload());
+            alert("LOSIENTO HAS PERDIDO 😥")
         }
     },1000);
 }
@@ -58,6 +59,12 @@ function activate(e){
                     intentos++
                     MostrarDesaciertos.innerHTML='intentos: '+intentos
                 }
+                if (puntos == 10){
+                    setInterval(location.reload());
+                    alert("FELICIDADES GANASTE 🥳")
+                    
+                }
+                
             }
         }
     }
