@@ -9,40 +9,37 @@ let temporizador=false
 let timer=50
 let tiempoAcabado=null
 
-
-
 let MostrarAciertos=document.getElementById('puntos')
 let MostrarDesaciertos=document.getElementById('intentos')
 let MostrarTiempo=document.getElementById('tiempo')
-
 let cardsss=' <div class="card"><div class="back"></div><div class="face"></div></div>'
 
 /*funcion del juego*/
-
 function contarTiempo(){
     tiempoAcabado = setInterval(()=>{
         timer--;
         MostrarTiempo.innerHTML = 'Tiempo: ' + timer + " segundos";
         if(timer == 0){
-            clearInterval(tiempoAcabado)
-            setInterval(location.reload());
+            setInterval(location.reload())
             alert("LOSIENTO HAS PERDIDO 😥")
         }
     },1000);
 }
 
-
 function activate(e){
+
 
     if(temporizador == false){
         contarTiempo();
         temporizador = true;
     }
 
+
     if(Movi<2){
-        if((!selectCards[0] || selectCards[0] !== e.target) && !e.target.classList.contains('active')){
+        if((selectCards[0]!== e.target) && !e.target.classList.contains('active')){
             e.target.classList.add('active');
             selectCards.push(e.target);
+            console.log(selectCards)
             if(++Movi==2){
                 if(selectCards[0].querySelectorAll('.face')[0].innerHTML == selectCards[1].querySelectorAll('.face')[0].innerHTML){
                     selectCards=[]
@@ -62,13 +59,14 @@ function activate(e){
                 if (puntos == 10){
                     setInterval(location.reload());
                     alert("FELICIDADES GANASTE 🥳")
-                    
+                   
                 }
-                
+               
             }
         }
     }
 }
+
 
 /*numeros aleatorios*/
 function numeroRandom(){
@@ -80,6 +78,7 @@ function numeroRandom(){
         numeroRandom()
     }
 }
+
 
 /*mostrar cartas*/
 for(let i=0;i<totalCartas;i++){
