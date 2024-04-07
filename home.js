@@ -7,7 +7,7 @@ let intentos=0
 let puntos=0
 let temporizador=false
 let timer=50
-let tiempoAcabado=null
+let tiempoAcabado=0
 
 let MostrarAciertos=document.getElementById('puntos')
 let MostrarDesaciertos=document.getElementById('intentos')
@@ -27,7 +27,6 @@ function contarTiempo(){
 }
 
 function activate(e){
-
 
     if(temporizador == false){
         contarTiempo();
