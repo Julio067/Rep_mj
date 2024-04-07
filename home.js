@@ -1,7 +1,7 @@
 const totalCartas=20
 let cards=[]
 let selectCards=[]
-let valueCards=[]
+let valueCards=[1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10]
 let Movi=0
 let intentos=0
 let puntos=0
@@ -12,7 +12,7 @@ let tiempoAcabado=0
 let MostrarAciertos=document.getElementById('puntos')
 let MostrarDesaciertos=document.getElementById('intentos')
 let MostrarTiempo=document.getElementById('tiempo')
-let cardsss=' <div class="card"><div class="back"></div><div class="face"></div></div>'
+let cardsss=' <div class="carta"><div class="detras"></div><div class="cara"></div></div>'
 
 /*funcion del juego*/
 function contarTiempo(){
@@ -21,26 +21,25 @@ function contarTiempo(){
         MostrarTiempo.innerHTML = 'Tiempo: ' + timer + " segundos";
         if(timer == 0){
             setInterval(location.reload())
-            alert("LOSIENTO HAS PERDIDO 😥")
+            alert("LO SIENTO HAS PERDIDO 😥")
         }
     },1000);
 }
 
-function activate(e){
+function mostrarCartas(e){
 
     if(temporizador == false){
         contarTiempo();
         temporizador = true;
     }
 
-
     if(Movi<2){
-        if((selectCards[0]!== e.target) && !e.target.classList.contains('active')){
+        if((selectCards[0]!== e.target)){
             e.target.classList.add('active');
             selectCards.push(e.target);
             console.log(selectCards)
             if(++Movi==2){
-                if(selectCards[0].querySelectorAll('.face')[0].innerHTML == selectCards[1].querySelectorAll('.face')[0].innerHTML){
+                if(selectCards[0].querySelectorAll('.cara')[0].innerHTML == selectCards[1].querySelectorAll('.cara')[0].innerHTML){
                     selectCards=[]
                     Movi=0
                     puntos++
@@ -66,18 +65,11 @@ function activate(e){
     }
 }
 
-
 /*numeros aleatorios*/
-function numeroRandom(){
-    let random=Math.floor(Math.random()*totalCartas*0.5)
-    let values=valueCards.filter(value => value === random)
-    if(values.length<2){
-        valueCards.push(random)
-    }else{
-        numeroRandom()
-    }
+function numeroRandom(n){
+    valueCards.sort(()=>Math.random()-0.5)
 }
-
+numeroRandom(valueCards)
 
 /*mostrar cartas*/
 for(let i=0;i<totalCartas;i++){
@@ -85,7 +77,6 @@ for(let i=0;i<totalCartas;i++){
     div.innerHTML = cardsss;
     cards.push(div)
     document.querySelector('#game').append(cards[i])
-    numeroRandom()
-    cards[i].querySelectorAll('.face')[0].innerHTML = valueCards[i]
-    cards[i].querySelectorAll('.card')[0].addEventListener('click', activate)
+    cards[i].querySelectorAll('.cara')[0].innerHTML = valueCards[i]
+    cards[i].querySelectorAll('.carta')[0].addEventListener('click', mostrarCartas)
 }
