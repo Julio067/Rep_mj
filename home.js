@@ -1,5 +1,5 @@
 const totalCartas=20
-let cards=[]
+let cartas=[]
 let selectCards=[]
 let valueCards=[1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10]
 let Movi=0
@@ -27,19 +27,22 @@ function contarTiempo(){
 }
 
 function mostrarCartas(e){
-
+    /*temporizador*/
     if(temporizador == false){
         contarTiempo();
         temporizador = true;
     }
 
+    
     if(Movi<2){
-        if((selectCards[0]!== e.target)){
+        Movi++
+        if(selectCards[0] !== e.target){
             e.target.classList.add('active');
             selectCards.push(e.target);
-            console.log(selectCards)
-            if(++Movi==2){
+            if(Movi==2){
                 if(selectCards[0].querySelectorAll('.cara')[0].innerHTML == selectCards[1].querySelectorAll('.cara')[0].innerHTML){
+                    selectCards[0].removeEventListener('click', mostrarCartas);
+                    selectCards[1].removeEventListener('click', mostrarCartas);
                     selectCards=[]
                     Movi=0
                     puntos++
@@ -75,8 +78,8 @@ numeroRandom(valueCards)
 for(let i=0;i<totalCartas;i++){
     let div = document.createElement('div')
     div.innerHTML = cardsss;
-    cards.push(div)
-    document.querySelector('#game').append(cards[i])
-    cards[i].querySelectorAll('.cara')[0].innerHTML = valueCards[i]
-    cards[i].querySelectorAll('.carta')[0].addEventListener('click', mostrarCartas)
+    cartas.push(div)
+    document.querySelector('#game').append(cartas[i])
+    cartas[i].querySelectorAll('.cara')[0].innerHTML = valueCards[i]
+    cartas[i].querySelectorAll('.carta')[0].addEventListener('click', mostrarCartas)
 }
