@@ -57,7 +57,7 @@ body {
  
 .carta .detras {
   border: 3px solid white;
-  background: url(Millonarios/escudo.jpg) center / contain;
+  background: url(img/escudo.jpg) center / contain;
 }
 
 .form{
@@ -76,12 +76,13 @@ h2{
 .result{
    color: #fff;
    border: 5px solid #ffff;
-   margin-top: auto;
    margin:auto;
-   margin-right: 40vh;
    font-size: 15px;
    border-radius: 12px;
    background-color: rgba(33, 82, 110, 0.342);
    padding: 5%;
    text-align: left;
+   position: absolute;
+   top:30%;
+   left:60%;
 }
